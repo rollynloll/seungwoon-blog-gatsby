@@ -1,4 +1,21 @@
-const config = require(`../../.ghost.json`).production;
+
+let ghostConfig = {}
+
+try {
+  ghostConfig = require(`../../.ghost.json`)
+} catch (e) {
+  ghostConfig = {
+    development: {
+      apiUrl: process.env.GHOST_API_URL,
+      contentApiKey: process.env.GHOST_CONTENT_API_KEY,
+    },
+    production: {
+      apiUrl: process.env.GHOST_API_URL,
+      contentApiKey: process.env.GHOST_CONTENT_API_KEY,
+    },
+  }
+}
+
 module.exports = {
     siteUrl:
         process.env.NODE_ENV === `production`
